@@ -3,4 +3,4 @@
 * Tmux style panes
 * Plugin api
 * Modularity
-
+* Scripting?
