@@ -4,3 +4,4 @@
 * Plugin api
 * Modularity
 * Scripting?
+  *  Bash support in the future?
