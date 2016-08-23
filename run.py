@@ -15,4 +15,3 @@ while 1:
         sh.userinput("pell {0} $ ")
     except (KeyboardInterrupt, EOFError) as e:
         print("")
-        sys.exit(0)

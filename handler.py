@@ -3,17 +3,38 @@ import subprocess
 import os
 import sys
 import getpass
+from rl import completer
+from rl import generator
+import readline
+import glob
 
 class shell():
     def __init__(self):
-        self.reserved = ["exit", "cd"]
+        self.reserved = ["exit", "cd", "export"]
+
+    def complete(self, text):
+        for x in self.reserved:
+            yield x
+        for directory in os.environ.get("PATH").split(':'):
+            directory = os.path.expanduser(directory)
+            if os.path.isdir(directory):
+                for name in os.listdir(directory):
+                    if name.startswith(text):
+                        if(os.access(os.path.join(directory, name), os.R_OK|os.X_OK)):
+                            yield name
+
 
     def getFormattedCWD(self):
-        return os.getcwd().replace("~", "/home/" + getpass.getuser())
+        out = os.getcwd()
+        out = out.replace("/home/" + getpass.getuser(), "~")
+        return out
 
     def userinput(self, ps1):
         prompt = ps1.format(self.getFormattedCWD(), getpass.getuser()) #Formats {0} to the current directory and {1} to the current user.
-        self.process(input(prompt))
+        completer.completer = generator(self.complete)
+        completer.parse_and_bind('TAB: complete')
+        data = input(prompt)
+        self.process(data)
 
     def process(self, data):
         tokens = data.split()
@@ -36,7 +57,6 @@ class shell():
                 os.chdir("/home/" + getpass.getuser())
         elif(tokens[0] == "exit"):
             sys.exit(0)
-
-
-#Plugin Handler.
-#WIP.
+        class Test:
+            def __init__(self, data):
+                self.data = data
