@@ -45,6 +45,3 @@ class shell():
                 os.chdir("/home/" + getpass.getuser())
         elif(tokens[0] == "exit"):
             sys.exit(0)
-        class Test:
-            def __init__(self, data):
-                self.data = data
