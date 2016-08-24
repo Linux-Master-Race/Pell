@@ -4,11 +4,7 @@ import sys
 import getpass
 import handler
 
-
 sh = handler.shell()
-
-
-
 
 while 1:
     try:
