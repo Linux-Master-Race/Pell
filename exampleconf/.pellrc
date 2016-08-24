@@ -1,0 +1,3 @@
+PELL_USE_JSON_CONFIG=True
+
+GlobalConfig["prompt"] = "iownall555@lmr ~/programming/python $"
