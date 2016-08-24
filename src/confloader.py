@@ -50,4 +50,3 @@ class PellConfig:
     # Return the config as a dictionary.
     def as_dict(self):
         return self.__config
-
