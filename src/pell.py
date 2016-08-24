@@ -3,11 +3,14 @@ import os
 import sys
 import getpass
 import handler
+from confloader import PellConfig
 
-sh = handler.shell()
+if __name__ == "__main__":
+    sh = handler.shell()
+    config = PellConfig()
 
-while 1:
-    try:
-        sh.userinput("pell {0} {1} ")
-    except (KeyboardInterrupt, EOFError) as e:
-        print("")
+    while 1:
+        try:
+            sh.userinput(config.get_option("prompt", "pell {0} {1} "))
+        except (KeyboardInterrupt, EOFError) as e:
+            print("")

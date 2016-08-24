@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class PellConfig:
@@ -7,16 +8,24 @@ class PellConfig:
             self,
             loadconf=True,  # Load the config file
             loadrc=False,  # Load the rc file
-            confpath='~/.pell.conf',  # Path to the conf file
-            rcpath='~/.pellrc'):  # Path to the rc file
+            confpath=os.path.expanduser("~")+'/.pell.conf',  # Path to the conf file
+            rcpath=os.path.expanduser("~")+'/.pellrc'):  # Path to the rc file
 
         self.__config = {}  # Contains the keys and values for the options.
         self.__defconfpath = "/etc/pell/pell.conf"  # Default conf path
         self.__defrcpath = "/etc/pell/pellrc"  # Default rc path
+        self.__confpath = confpath
+        self.__rcpath = rcpath
+
+        if loadconf == True:
+            self.parse_conf()
 
     # Returns the value of an option or a default if the option doesn't exist.
     def get_option(self, optname, defvalue):
-        pass
+        if optname in self.__config:
+            return self.__config[optname]
+        else:
+            return defvalue
 
     # Sets an option to the specified value
     def set_option(self, optname, value):
@@ -29,23 +38,17 @@ class PellConfig:
 
     # Parses the conf file set in the initialiser with the json module.
     def parse_conf(self):
-        pass
-
-    # Gets the path to the rc file.
-    def get_rc_path(self):
-        pass
-
-    # Gets the path to the conf file.
-    def get_conf_path(self):
-        pass
-
-    # Sets the path to the rc file.
-    def set_rc_path(self, rcpath):
-        pass
-
-    # Sets the path to the conf file.
-    def set_conf_path(self, confpath):
-        pass
+            try:
+                if os.path.isfile(self.__confpath):
+                    jsonfile = open(self.__confpath, "r")
+                elif os.path.isfile(self.__defconfpath):
+                    jsonfile = open(self.__defconfpath, "r")
+                else:
+                     print("No valid config file found.")
+                     return
+                self.__config = json.load(jsonfile)
+            except (ValueError,IOError) as e:
+                print("Unable to load config file at:", e)
 
     # Return the config as a dictionary.
     def as_dict(self):
