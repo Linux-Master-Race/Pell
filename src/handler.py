@@ -16,7 +16,12 @@ class shell():
         return out
 
     def userinput(self, ps1):
-        prompt = ps1.format(self.getFormattedCWD(), getpass.getuser()) #Formats {0} to the current directory and {1} to the current user.
+        print(getpass.getuser())
+        if getpass.getuser() in ["root", "toor"]:
+            usrsym = "#"
+        else:
+            usrsym = "$"
+        prompt = ps1.format(self.getFormattedCWD(), usrsym) #Formats {0} to the current directory and {1} to the current user.
         data = input(prompt)
         self.process(data)
 
