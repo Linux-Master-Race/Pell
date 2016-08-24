@@ -3,8 +3,6 @@ import subprocess
 import os
 import sys
 import getpass
-#from rl import completer
-#from rl import generator
 import readline
 import glob
 
