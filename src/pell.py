@@ -8,6 +8,6 @@ sh = handler.shell()
 
 while 1:
     try:
-        sh.userinput("pell {0} {1} ")
+        sh.userinput("{0}@{1} {2} {3} ")
     except (KeyboardInterrupt, EOFError) as e:
         print("")
