@@ -5,7 +5,7 @@ import sys
 import getpass
 import readline
 import glob
-
+import platform
 
 class shell():
 
@@ -23,7 +23,7 @@ class shell():
         else:
             usrsym = "$"
         # Formats {0} to the current directory and {1} to the current user.
-        prompt = ps1.format(self.getFormattedCWD(), usrsym)
+        prompt = ps1.format(getpass.getuser(), platform.node(), self.getFormattedCWD(), usrsym)
         data = input(prompt)
         self.process(data)
 
