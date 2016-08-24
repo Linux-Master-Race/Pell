@@ -8,7 +8,7 @@ class PellConfig:
             loadconf=True,  # Load the config file
             loadrc=False,  # Load the rc file
             confpath='~/.config/pell.conf',  # Path to the conf file
-            rcpath='~/.config/pellrc'):  # Path to the rc file
+            rcpath='~/.pellrc'):  # Path to the rc file
 
         self.__config = {}  # Contains the keys and values for the options.
         self.__defconfpath = "/etc/pell/pell.conf"  # Default conf path
