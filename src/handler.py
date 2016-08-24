@@ -1,4 +1,4 @@
-#Shell class
+# Shell class
 import subprocess
 import os
 import sys
@@ -6,7 +6,9 @@ import getpass
 import readline
 import glob
 
+
 class shell():
+
     def __init__(self):
         self.reserved = ["exit", "cd", "export"]
 
@@ -20,28 +22,39 @@ class shell():
             usrsym = "#"
         else:
             usrsym = "$"
-        prompt = ps1.format(self.getFormattedCWD(), usrsym) #Formats {0} to the current directory and {1} to the current user.
+        # Formats {0} to the current directory and {1} to the current user.
+        prompt = ps1.format(self.getFormattedCWD(), usrsym)
         data = input(prompt)
         self.process(data)
 
     def process(self, data):
         tokens = data.split()
-        if(len(tokens) <= 0): #If there is any input.
-            return #Exit function.
-        if(tokens[0] not in self.reserved): #If command is not reserved for the shell.
+        if(len(tokens) <= 0):  # If there is any input.
+            return  # Exit function.
+
+        # If command is not reserved for the shell.
+        if(tokens[0] not in self.reserved):
             try:
-                subprocess.call(tokens) #Runs program.
-            except FileNotFoundError: #If it cannot find the program.
+                subprocess.call(tokens)  # Runs program.
+            except FileNotFoundError:  # If it cannot find the program.
                 print("File or command not found.")
             return
 
         if(tokens[0] == "cd"):
             if(len(tokens) >= 2):
                 try:
-                    os.chdir(tokens[1].replace("~", "/home/" + getpass.getuser()))
+                    # PEP8 made sure this variable name was awful
+                    # It also made this one line into 2
+                    hd = tokens[1].replace("~", "/home/" + getpass.getuser())
+                    os.chdir(hd)
                 except:
                     print("Directory does not exist.")
             else:
                 os.chdir("/home/" + getpass.getuser())
         elif(tokens[0] == "exit"):
             sys.exit(0)
+
+        class Test:
+
+            def __init__(self, data):
+                self.data = data
