@@ -10,9 +10,9 @@ class PellConfig:
             rcpath='~/.pellrc',
             confpath='~/.pell.conf'):
 
-        self.__config={}
-        self.__defconfpath="/etc/pell/pell.conf"
-        self.__defrcpath="/etc/pell/pellrc"
+        self.__config = {}
+        self.__defconfpath = "/etc/pell/pell.conf"
+        self.__defrcpath = "/etc/pell/pellrc"
 
     def get_option(self, optname, defvalue):
         pass
