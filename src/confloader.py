@@ -18,7 +18,7 @@ class PellConfig:
     def get_option(self, optname, defvalue):
         pass
 
-    # Sets an option to the sepecified value
+    # Sets an option to the specified value
     def set_option(self, optname, value):
         pass
 
