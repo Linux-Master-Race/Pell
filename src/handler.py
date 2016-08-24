@@ -14,7 +14,7 @@ class shell():
 
     def getFormattedCWD(self):
         out = os.getcwd()
-        out = out.replace("/home/" + getpass.getuser(), "~")
+        out = out.replace(os.path.expanduser("~"), "~")
         return out
 
     def userinput(self, ps1):
@@ -45,12 +45,12 @@ class shell():
                 try:
                     # PEP8 made sure this variable name was awful
                     # It also made this one line into 2
-                    hd = tokens[1].replace("~", "/home/" + getpass.getuser())
+                    hd = tokens[1].replace("~", os.path.expanduser("~"))
                     os.chdir(hd)
                 except:
                     print("Directory does not exist.")
             else:
-                os.chdir("/home/" + getpass.getuser())
+                os.chdir(os.path.expanduser("~"))
         elif(tokens[0] == "exit"):
             sys.exit(0)
 
