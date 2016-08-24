@@ -16,7 +16,6 @@ class shell():
         return out
 
     def userinput(self, ps1):
-        print(getpass.getuser())
         if getpass.getuser() in ["root", "toor"]:
             usrsym = "#"
         else:
